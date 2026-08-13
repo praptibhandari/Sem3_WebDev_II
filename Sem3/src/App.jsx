@@ -22,12 +22,24 @@
 
 // export default App
 
+// import React from 'react'
+// import Todo from './Class4/Todo' 
+// const App = () => {
+//   return (
+//     <div>
+//       <Todo/>
+//     </div>
+//   )
+// }
+
+// export default App
+
 import React from 'react'
-import Todo from './Class4/Todo' 
+import Zepto from './Class7/Zepto.jsx'
 const App = () => {
   return (
     <div>
-      <Todo/>
+      <Zepto/>
     </div>
   )
 }
