@@ -23,12 +23,38 @@
 
 // export default App
 
+// import React from 'react'
+// import Ques03 from "./Assi_1_(State_Props)/ques_03"
+// const App = () => {
+//   return (
+//     <div>
+//       <Ques03/>
+//     </div>
+//   )
+// }
+
+// export default App
+
+// import React from 'react'
+// import Ass02_Ques1 from './Assi_2_(API_Calling)/Ques_01'
+// const App = () => {
+//   return (
+//     <div>
+//       <Ass02_Ques1/>
+//     </div>
+//   )
+// }
+
+// export default App
+
+
 import React from 'react'
-import Ques03 from "./Assi_1_(State_Props)/ques_03"
+import Ass_02_Ques2 from './Assi_2_(API_Calling)/Ques_02'
+
 const App = () => {
   return (
     <div>
-      <Ques03/>
+      <Ass_02_Ques2 />
     </div>
   )
 }

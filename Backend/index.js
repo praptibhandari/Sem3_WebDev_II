@@ -75,9 +75,9 @@ app.use((req, res, next)=>{
     next()
 })
 
-app.use((req, res, next)=>{
-    console.log("beta merse kaise bachega ??")
-})
+// app.use((req, res, next)=>{
+//     console.log("beta merse kaise bachega ??")
+// })
 
 app.get('/', (req, res)=>{
     res.send("hello")
