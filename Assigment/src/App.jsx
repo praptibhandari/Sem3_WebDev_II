@@ -48,13 +48,40 @@
 // export default App
 
 
+// import React from 'react'
+// import Ass_02_Ques2 from './Assi_2_(API_Calling)/Ques_02'
+
+// const App = () => {
+//   return (
+//     <div>
+//       <Ass_02_Ques2 />
+//     </div>
+//   )
+// }
+
+// export default App
+
+// import React from 'react'
+// import Ass_03_Ques3 from './Assi_2_(API_Calling)/Ques_03'
+
+// const App = () => {
+//   return (
+//     <div>
+//       <Ass_03_Ques3 />
+//     </div>
+//   )
+// }
+
+// export default App
+
+
 import React from 'react'
-import Ass_02_Ques2 from './Assi_2_(API_Calling)/Ques_02'
+import Assi_3_Ques_01 from './Assi_3_(DOM)/Ques_01'
 
 const App = () => {
   return (
     <div>
-      <Ass_02_Ques2 />
+      <Assi_3_Ques_01 />
     </div>
   )
 }
