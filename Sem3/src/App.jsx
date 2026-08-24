@@ -34,13 +34,49 @@
 
 // export default App
 
+// import React from 'react'
+// import Zepto from './Class7/Zepto.jsx'
+// const App = () => {
+//   return (
+//     <div>
+//       <Zepto/>
+//     </div>
+//   )
+// }
+
+// export default App
+
+
+
+
+
 import React from 'react'
-import Zepto from './Class7/Zepto.jsx'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
 const App = () => {
+  let [apiData, setApiData] = useState([])
+  useEffect(()=>{
+
+   async function api(){
+    let res = await axios.get("http://localhost:4000/")
+    console.log(res.data)
+    }
+    api()
+    // fetch("http://localhost:4000/")
+    
+    // .then((res)=>{
+    //   return res.json()
+    // })
+
+    // .then((data)=>{
+    //   console.log(data);
+    // })
+
+
+  },[])
   return (
-    <div>
-      <Zepto/>
-    </div>
+    <div>App</div>
   )
 }
 

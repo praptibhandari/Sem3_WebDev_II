@@ -43,6 +43,8 @@
 
 let express= require("express")
  let app= express()
+let cors = require('cors')
+ app.use(cors())
  let products = [
     {
         id: 1,
@@ -101,7 +103,7 @@ app.get('/product/:id',(req,res)=>{
 
    })
    if(!data){
-      return res.status(404).json({msg:"not founddddddddd"})
+      return res.status(404).json({msg:"noi noi"})
    }
    res.status(200).json({msg:data})
    // console.log(data,"ididid");
@@ -119,7 +121,7 @@ app.get('/search',(req,res)=>{
          })
 
          if(!data){
-            return res.status(404).json({msg:"not founddddddddd"})
+            return res.status(404).json({msg:"nhi mila ree"})
 
          }
          res.status(200).json({msg:data})
