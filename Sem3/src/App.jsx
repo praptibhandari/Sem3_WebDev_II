@@ -54,18 +54,18 @@
 // export default App
 
 
-import React from 'react'
-import Game from './Class4/lab.jsx'
+// import React from 'react'
+// import Game from './Class4/lab.jsx'
 
-const App = () => {
-  return (
-    <div>
-      <Game />
-    </div>
-  )
-}
+// const App = () => {
+//   return (
+//     <div>
+//       <Game />
+//     </div>
+//   )
+// }
 
-export default App
+// export default App
 
 // import React from 'react'
 // import { useState } from 'react'
@@ -98,3 +98,16 @@ export default App
 // }
 
 // export default App
+
+
+import React from 'react'
+import BackFront from "./BackFront.jsx"
+const App = () => {
+  return (
+    <div>
+      <BackFront/>
+    </div>
+  )
+}
+
+export default App

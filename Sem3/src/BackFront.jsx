@@ -1,8 +1,16 @@
 import React from 'react'
 
 const BackFront = () => {
+    
   return (
-    <div>BackFront</div>
+    <div>
+
+        <input
+        
+        />
+
+
+    </div>
   )
 }
 
