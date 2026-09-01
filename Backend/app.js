@@ -144,6 +144,7 @@ let mongoose=   require('mongoose')
 let bcryptjs=  require('bcryptjs')
 let app=  express()
 let cors = require('cors')
+let jwt = require('jsonwebtoken')
 let User=  require('./db/db.js')
 app.use(express.json())
 // app.use('cors')
@@ -153,22 +154,27 @@ mongoose.connect("mongodb://127.0.0.1:27017/db").then(()=>{
    
 })
 app.post("/signUp", async(req,res)=>{
-   let {name,email,password}=req.body
-  let findData=   await User.findOne({email})
-  console.log(findData,"hjehehe");
-  
+   let {name,email,password,role}=req.body
+
+   let findData = await User.findOne({email})
+   console.log(findData,"hjehehe");
+   
   if(findData){
    return res.send("user jinda haii....")
-  }else{
-     let updateddP=   await bcryptjs.hash(password,10)
+  }
+  else{
+     let updateddP = await bcryptjs.hash(password,10)
      console.log(updateddP,"dekhoooooo");
+   
      
  let UserInfo=  new User({
       name,
       email,
-      password:updateddP
+      password:updateddP,
+      role:role||'user'
 
    })
+
       await UserInfo.save()
       res.send("done.......")
   }
@@ -186,10 +192,27 @@ app.post('/login',async(req,res)=>{
    if (!validp){
    return res.send("Kuch  nhi hoga  tumse")
    }
+
+   let token = jwt.sign({email:findData.email, role:findData.role},"hehehe")
+   console.log(token,"id done")
+
+
    res.send("all done.....")
 
    
 })
+
+let auth = (req,res,next)=>{
+   let token = req.headers.authorization;
+   console.log(token,"token");
+
+   if(!token){
+      return res.send()
+   }
+}
+
+
+
 
 app.listen(3000,()=>{
    console.log("server......");

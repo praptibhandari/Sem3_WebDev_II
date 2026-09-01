@@ -3,9 +3,14 @@ let mongoose= require('mongoose')
 let userSchema=  new mongoose.Schema({
     name:String,
     email:String,
-    password:String
+    password:String,
+    role:{
+        type:String,
+        enum:["user","admin"],
+        default:"user"
+    }
 
 })
 
-let User= mongoose.model("user",userSchema)
-module.exports=User
+let User = mongoose.model("user",userSchema)
+module.exports= User
