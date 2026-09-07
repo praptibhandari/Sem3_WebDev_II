@@ -136,7 +136,7 @@
 
 //  })
 
-//////////// sign up n login  /////
+//////////// sign up n login  ////////////////
 
 
 let express= require("express")
@@ -147,7 +147,7 @@ let cors = require('cors')
 let jwt = require('jsonwebtoken')
 let User=  require('./db/db.js')
 app.use(express.json())
-// app.use('cors')
+app.use(cors())
 
 mongoose.connect("mongodb://127.0.0.1:27017/db").then(()=>{
    console.log("db......");
@@ -193,11 +193,17 @@ app.post('/login',async(req,res)=>{
    return res.send("Kuch  nhi hoga  tumse")
    }
 
-   let token = jwt.sign({email:findData.email, role:findData.role},"hehehe")
-   console.log(token,"id done")
+   let token = jwt.sign({
+      userId: findData._id,
+      email: findData.email,
+      role: findData.role
+   }, "hehehe");
 
 
-   res.send("all done.....")
+   res.send({
+   message: "all done",
+   token: token
+})
 
    
 })
@@ -207,9 +213,55 @@ let auth = (req,res,next)=>{
    console.log(token,"token");
 
    if(!token){
-      return res.send()
+      return res.send("kon ho aap")
+   }
+   
+   let decode = jwt.verify(token,"hehehe")  
+   console.log(decode,"decode");
+   req.user = decode
+ 
+   next()
+}
+
+let roleCheck =(role)=>{
+   return (req,res,next)=>{
+      if(req.user.role !== role){
+         return res.send("app kon jii")
+      }
+      next()
    }
 }
+
+
+app.get("/api",auth,(req,res)=>{
+   res.send("all set")
+})
+
+
+app.get('/admin', auth, roleCheck('admin'),(req,res)=>{
+   res.send("admin here")
+})
+
+app.get('/user', auth, roleCheck('user'),(req,res)=>{
+   res.send("user here")
+})
+
+
+
+
+app.get('/me', auth, async (req, res) => {
+
+   console.log(req.user); 
+   let id = req.user.userId;
+   let user = await User.findById(id);
+   console.log(user);
+
+   res.send({
+      name: user.name,
+      email: user.email,
+      role: user.role
+   });
+});
 
 
 
