@@ -187,7 +187,11 @@ app.post('/login',async(req,res)=>{
 
    let findData =await User.findOne({email})
    console.log(findData,"heheheh");
-    
+   
+   if (!findData) {
+      return res.status(404).send("User not found");
+   }
+   
    let validp = await bcryptjs.compare(password,findData.password)
    if (!validp){
    return res.send("Kuch  nhi hoga  tumse")

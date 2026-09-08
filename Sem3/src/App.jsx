@@ -112,14 +112,41 @@
 
 // export default App
 
-import React from 'react'
-import Login from "./Frontend/Login.jsx"
-const App = () => {
+// import React from 'react'
+// import Login from "./Frontend/Login.jsx"
+// const App = () => {
+//   return (
+//     <div>
+//       <Login/>
+//     </div>
+//   )
+// }
+
+// export default App
+
+import { useState } from "react";
+import Login from "./Frontend/Login";
+import Signup from "./Frontend/Signp";
+import Home from "./Frontend/Home.jsx";
+
+function App() {
+  const [page, setPage] = useState("login");
+
   return (
     <div>
-      <Login/>
+      {page === "login" && (
+        <Login setPage={setPage} />
+      )}
+
+      {page === "signup" && (
+        <Signup setPage={setPage} />
+      )}
+
+      {page === "home" && (
+        <Home setPage={setPage} />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,111 +1,83 @@
 import { useState } from "react";
 
-function Login() {
+function Login({ setPage }) {
 
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-   const loginUser = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-      console.log("LOGIN CLICKED");
+    let response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    });
 
-      try {
+    let data = await response.json();
 
-         const response = await fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: {
-               "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-               email: email,
-               password: password
-            })
-         });
+    console.log(data);
 
-         const data = await response.json();
+    if (data.token) {
 
-         console.log("BACKEND RESPONSE:", data);
+      // Store JWT
+      localStorage.setItem("token", data.token);
 
-         if (data.token) {
-            localStorage.setItem("token", data.token);
-            alert("Login successful!");
-         } else {
-            alert(data.message || "Login failed");
-         }
+      alert("Login successful!");
 
-      } catch (error) {
-         console.log("ERROR:", error);
-      }
-   };
+      setPage("home");
 
+    } else {
+      alert(data);
+    }
+  };
 
-   const getUser = async () => {
+  return (
+    <div>
 
-      console.log("USER BUTTON CLICKED");
+      <h1>Login</h1>
 
-      const token = localStorage.getItem("token");
+      <form onSubmit={handleLogin}>
 
-      console.log("TOKEN:", token);
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      if (!token) {
-         alert("First login!");
-         return;
-      }
+        <br />
 
-      try {
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-         const response = await fetch("http://localhost:3000/user", {
-            method: "GET",
-            headers: {
-               Authorization: `Bearer ${token}`
-            }
-         });
+        <br />
 
-         const data = await response.text();
+        <button type="submit">
+          Login
+        </button>
 
-         console.log("USER RESPONSE:", data);
+      </form>
 
-         alert(data);
+      <p>
+        Don't have an account?
 
-      } catch (error) {
-         console.log("ERROR:", error);
-      }
-   };
+        <button onClick={() => setPage("signup")}>
+          Signup
+        </button>
+      </p>
 
-
-   return (
-      <div>
-
-         <h1>Login</h1>
-
-         <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-         />
-
-         <br />
-
-         <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-         />
-
-         <br />
-
-         <button onClick={loginUser}>
-            Login
-         </button>
-
-         <button onClick={getUser}>
-            Access User
-         </button>
-
-      </div>
-   );
+    </div>
+  );
 }
 
 export default Login;
