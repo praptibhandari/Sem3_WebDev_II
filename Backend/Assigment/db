@@ -1,0 +1,12 @@
+let mongoose = require("mongoose");
+
+let studentSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    age: Number,
+    course: String
+});
+
+let Student = mongoose.model("student", studentSchema);
+
+module.exports = Student;

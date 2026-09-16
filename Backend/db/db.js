@@ -6,9 +6,11 @@ let userSchema=  new mongoose.Schema({
     password:String,
     role:{
         type:String,
-        enum:["user","admin"],
+        enum:["user","admin","instructor"],
         default:"user"
-    }
+    },
+    resetToken: String,
+    resetTokenExpiry: Date,
 
 })
 
