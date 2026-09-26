@@ -1,12 +1,19 @@
-let mongoose = require("mongoose");
+// let mongoose = require("mongoose");
 
-let studentSchema = new mongoose.Schema({
-    id: Number,
-    name: String,
-    age: Number,
-    course: String
-});
+// let studentSchema = new mongoose.Schema({
+//     id: Number,
+//     name: String,
+//     age: Number,
+//     course: String
+// });
 
-let Student = mongoose.model("student", studentSchema);
+let mongoose= require('mongoose')
+   
+let userSchema=  new mongoose.Schema({
+    name:String,
+    email:String,
+    password:String,
+})
 
-module.exports = Student;
+let User = mongoose.model("user",userSchema)
+module.exports= User

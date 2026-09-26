@@ -124,29 +124,92 @@
 
 // export default App
 
+// import { useState } from "react";
+// import Login from "./Frontend/Login";
+// import Signup from "./Frontend/Signp";
+// import Home from "./Frontend/Home.jsx";
+
+// function App() {
+//   const [page, setPage] = useState("login");
+
+//   return (
+//     <div>
+//       {page === "login" && (
+//         <Login setPage={setPage} />
+//       )}
+
+//       {page === "signup" && (
+//         <Signup setPage={setPage} />
+//       )}
+
+//       {page === "home" && (
+//         <Home setPage={setPage} />
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
+
 import { useState } from "react";
-import Login from "./Frontend/Login";
-import Signup from "./Frontend/Signp";
-import Home from "./Frontend/Home.jsx";
+
 
 function App() {
-  const [page, setPage] = useState("login");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email
+            })
+        });
 
-  return (
-    <div>
-      {page === "login" && (
-        <Login setPage={setPage} />
-      )}
+        const data = await response.json();
+        setMessage(data.message);
+    };
 
-      {page === "signup" && (
-        <Signup setPage={setPage} />
-      )}
+    return (
+        <div>
 
-      {page === "home" && (
-        <Home setPage={setPage} />
-      )}
-    </div>
-  );
+            <h1>User Form</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <input
+                    type="text"
+                    placeholder="Enter name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+
+                <br /><br />
+
+                <input
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <br /><br />
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+            <h3>{message}</h3>
+
+        </div>
+    );
 }
 
 export default App;

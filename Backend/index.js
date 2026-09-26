@@ -1,9 +1,9 @@
 // const fs = require('fs')
 // // console.log("1")
 
-// // fs.writeFileSync("home.txt", "hello home",()=>{
-// //     console.log("meow moew");
-// // })
+// fs.writeFileSync("home.txt", "hello home",()=>{
+//     console.log("meow moew");
+// })
 
 // // console.log("2")
 // // console.log("A")
@@ -723,6 +723,18 @@ app.post("/reset-password/:token", async(req,res)=>{
    }
  })
 
+ app.get('/error', (req,res)=>{
+   try{
+      let user = null;
+      console.log(user.name);
+      console.log("hehehehe");
+      console.log("hey!!")
+   }
+   catch(err){
+      res.send("mai error hu",err)
+   }
+
+})
 
 app.listen(3000,()=>{
    console.log("server......");
